@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const dotenv = require("dotenv");
 
 const todoRoutes = require("./Routes/todo");
@@ -8,11 +7,6 @@ const todoRoutes = require("./Routes/todo");
 dotenv.config();
 
 const app = express();
-app.use(
-  cors({
-    origin: "http://localhost:5174",
-  })
-);
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
@@ -30,7 +24,6 @@ const PORT = process.env.PORT || 3001;
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    //listening
     app.listen(PORT, () => {
       console.log(
         `server is up and running on port:http://localhost:${PORT} & connected to db`
