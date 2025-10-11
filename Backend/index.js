@@ -1,12 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+require("dotenv").config();
 
-const todoRoutes = require("./Routes/todo");
-
-dotenv.config();
+const todoRouter = require("./Routes/todo");
 
 const app = express();
+
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
@@ -14,22 +13,21 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.json({
+  res.send({
     msg: "welcome to todo",
   });
 });
-app.use("/api/todos", todoRoutes);
+app.use("/api/todos", todoRouter);
 const PORT = process.env.PORT || 3001;
-
+const mongoURI = process.env.MONGO_URI;
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(mongoURI)
   .then(() => {
+    console.log("connected to db");
     app.listen(PORT, () => {
-      console.log(
-        `server is up and running on port:http://localhost:${PORT} & connected to db`
-      );
+      console.log(`server is listening on port:http://localhost:${PORT} `);
     });
   })
-  .catch((err) => {
-    console.log(err);
+  .catch((error) => {
+    console.log(error);
   });
