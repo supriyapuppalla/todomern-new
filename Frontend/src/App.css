@@ -1,7 +1,6 @@
 .home {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 .create_form input {
   width: 300px;
