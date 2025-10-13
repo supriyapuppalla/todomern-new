@@ -6,10 +6,12 @@ function Create({ onAdd }) {
   const [task, setTask] = useState("");
   const handleAdd = () => {
     if (!task.trim()) return;
-    axios.post("http://localhost:3001/api/todos", { task }).then((res) => {
-      onAdd(res.data);
-      setTask("");
-    });
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/todos`, { task })
+      .then((res) => {
+        onAdd(res.data);
+        setTask("");
+      });
   };
 
   return (
