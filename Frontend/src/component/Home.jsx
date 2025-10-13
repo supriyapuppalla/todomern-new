@@ -11,20 +11,22 @@ function Home() {
   const [todos, setTodos] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/todos")
+      .get(`${process.env.REACT_APP_API_URL}/api/todos`)
       .then((res) => setTodos(res.data));
   }, []);
 
   const handleEdit = (id) => {
-    axios.put(`http://localhost:3001/api/todos/${id}`).then(() => {
+    axios.put(`${process.env.REACT_APP_API_URL}/api/todos/${id}`).then(() => {
       setTodos(todos.map((todo) => (todo._id === id ? res.data : todo)));
     });
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/api/todos/${id}`).then(() => {
-      setTodos(todos.filter((todo) => todo._id !== id));
-    });
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/api/todos/${id}`)
+      .then(() => {
+        setTodos(todos.filter((todo) => todo._id !== id));
+      });
   };
 
   const handleAdd = (newTodo) => {
