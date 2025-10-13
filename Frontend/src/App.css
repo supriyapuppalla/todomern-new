@@ -11,7 +11,7 @@
 }
 .create_form button {
   padding: 10px;
-  background-color: green;
+  background-color: yellow;
   color: white;
   cursor: pointer;
 }
@@ -20,7 +20,6 @@
   align-items: center;
   width: 345px;
   justify-content: space-between;
-  background-color: blue;
   color: white;
   height: 35px;
   padding: 2px 5px 2px 5px;
